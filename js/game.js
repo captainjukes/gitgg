@@ -76,6 +76,8 @@ Alien.prototype.step = function(dt) {
   return true;
 }
 
+
+
 Alien.prototype.fireSometimes = function() {
       if(Math.random()*100 < 10) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
@@ -104,9 +106,13 @@ Player.prototype.step = function(dt) {
 
   if(this.x < 0) this.x = 0;
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
-
+    
   this.reloading--;
+    
 
+
+
+    
 /* player missile settings; ammunition and reloading */  
     if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 100) {
     GameAudio.play('fire');
