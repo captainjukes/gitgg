@@ -114,14 +114,14 @@ Player.prototype.step = function(dt) {
 
     
 /* player missile settings; ammunition and reloading */  
-    if(Game.keys['fire'] && this.reloading <= 0 && this.board.missiles < 100) {
+    if(Game.keys['fire'] && this.reloading <=0 && this.board.missiles < 100) {
     GameAudio.play('fire');
     this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -100, player: true });
     this.board.missiles++;
-    this.reloading = 0;
+    this.reloading = 10;
   }
   return true;
 }
