@@ -79,7 +79,7 @@ Alien.prototype.step = function(dt) {
 
 
 Alien.prototype.fireSometimes = function() {
-      if(Math.random()*100 < 10) {
+      if(Math.random()*100 < 20) {
         this.board.addSprite('missile',this.x + this.w/2 - Sprites.map.missile.w/2,
                                       this.y + this.h, 
                                      { dy: 100 });
@@ -107,6 +107,8 @@ Player.prototype.step = function(dt) {
   if(this.x < 0) this.x = 0;
   if(this.x > Game.width-this.w) this.x = Game.width-this.w;
     
+
+    
   this.reloading--;
     
 
@@ -120,7 +122,7 @@ Player.prototype.step = function(dt) {
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -100, player: true });
-    this.board.missiles++;
+    this.board.e_missiles++;
     this.reloading = 10;
   }
   return true;
@@ -148,7 +150,27 @@ Missile.prototype.step = function(dt) {
 }
 
 Missile.prototype.die = function() {
-  if(this.player) this.board.missiles--;
+  if(this.player) this.board.e_missiles--;
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
 }
+
+var EnemyMissile = function(x,y) {
+  this.setup('e_missile',{ vy: 200, damage: 10 });
+  this.x = x - this.w/2;
+  this.y = y;
+};
+
+/*EnemyMissile.prototype = new Sprite();
+EnemyMissile.prototype.type = OBJECT_ENEMY_PROJECTILE;
+
+EnemyMissile.prototype.step = function(dt)  {
+  this.y += this.vy * dt;
+  var collision = this.board.collide(this,OBJECT_PLAYER)
+  if(collision) {
+    collision.hit(this.damage);
+    this.board.remove(this);
+  } else if(this.y > Game.height) {
+      this.board.remove(this); 
+  }
+};*/
