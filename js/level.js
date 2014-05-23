@@ -41,17 +41,35 @@
     var screen = new GameScreen("Space Invaders GLHF","press space to start",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
+                                     
                                  });
     Game.loadBoard(screen);
     Game.loop();
+     
+      /* game background song */
+     myAudio = new Audio('sound/spacebattle2.wav'); 
+if (typeof myAudio.loop == 'boolean')
+{
+    myAudio.loop = true;
+}
+else
+{
+    myAudio.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+}
+myAudio.play();
   }
 
+//end game function
   function endGame() {
     var screen = new GameScreen("GG Game Over","(press space to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                  });
     Game.loadBoard(screen);
+      
   }
 
 
@@ -64,7 +82,7 @@
   }
 
   $(function() {
-    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'media/explosion.ogg' }, 
+    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav', 'die2': 'sound/vi.wav' }, 
                    function() { 
                        Game.initialize("#gameboard", levelData, spriteData,
                                       { "start": startGame,
