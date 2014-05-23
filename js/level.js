@@ -68,6 +68,7 @@ myAudio.play();
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
+                                     myAudio2.pause();
                                  });
     Game.loadBoard(screen);
       //pause ingame background music
@@ -91,7 +92,7 @@ myAudio2.play();
 
 
   function winGame() {
-    var screen = new NewGameScreen("GG,You Win!","(press space to restart)",
+    var screen = new NewGameScreen("GG,You Win!","(press enter to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
