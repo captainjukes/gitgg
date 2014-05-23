@@ -52,37 +52,58 @@ if (typeof myAudio.loop == 'boolean')
 {
     myAudio.loop = true;
 }
-else
+/*else
 {
     myAudio.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
     }, false);
-}
+}*/
 myAudio.play();
   }
 
-//end game function
+//end-game function
   function endGame() {
     var screen = new GameScreen("GG Game Over","(press space to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
+                                     myAudio.play();
                                  });
     Game.loadBoard(screen);
+      //pause ingame background music
+      myAudio.pause();
+      //loop for troll teemo endgame music
+       myAudio2 = new Audio('sound/teemogg.wav'); 
+      if (typeof myAudio2.loop == 'boolean')
+      {
+        myAudio2.loop = true;
+      }
+     /* else
+      {
+          myAudio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+}*/
+myAudio2.play();
       
   }
 
 
   function winGame() {
-    var screen = new GameScreen("GG,You Win!","(press space to restart)",
+    var screen = new NewGameScreen("GG,You Win!","(press space to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
+                                     myAudio.play();
                                  });
     Game.loadBoard(screen);
+      myAudio.pause();
+      myAudio3 = new Audio('sound/ggsound.mp3');
+      myAudio3.play();
   }
 
   $(function() {
-    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav', 'die2': 'sound/vi.wav' }, 
+    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav', }, 
                    function() { 
                        Game.initialize("#gameboard", levelData, spriteData,
                                       { "start": startGame,
