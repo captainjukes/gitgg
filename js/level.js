@@ -31,7 +31,7 @@
     'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
     'player': { sx: 0,  sy: 55/*36*/, w: 45/*23*/, h: 33/*27*/, cls: Player ,frames: 2 },
     'missile': { sx: 0,  sy: 89, w: 13,  h: 14, cls: Missile },
-    'esmissile': { sx: 0,  sy: 86, w: 13,  h: 14, cls: Missile },
+    'emissile': { sx: 15,  sy: 90, w: 5,  h: 14, cls: Emissile },
 
       
   }
@@ -64,7 +64,7 @@ myAudio.play();
 
 //end-game function
   function endGame() {
-    var screen = new GameScreen("GG Game Over","(press space to restart)",
+    var screen = new NewGameScreen("GG Game Over","(press enter to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
