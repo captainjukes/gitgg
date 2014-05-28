@@ -38,7 +38,7 @@
 
 /* text configuration for start, game over and win */    
   function startGame() {
-    var screen = new GameScreen("Space Invaders GLHF","press space to start",
+    var screen = new GameScreen("HK Space Police","press space to start",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      
