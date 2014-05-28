@@ -64,7 +64,7 @@ myAudio.play();
 
 //end-game function
   function endGame() {
-    var screen = new NewGameScreen("GG Game Over","(press enter to restart)",
+    var screen = new GameScreen("GG Game Over","(press enter to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
