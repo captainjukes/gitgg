@@ -13,7 +13,8 @@
           [1,0,1,1,0,0,0,1,1,1,1],
           [1,1,1,1,2,2,2,0,0,2,1],
           [1,0,0,1,0,0,0,0,0,2,1],
-          [1,1,1,1,0,0,0,2,2,2,1]],
+          [1,1,1,1,0,3,0,2,2,2,1]],
+        
      2:  [[0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
@@ -24,11 +25,24 @@
           [1,0,1,1,1,1,1,1,1,0,1],
           [0,0,0,1,1,1,1,1,0,0,0],
           [0,0,0,0,1,1,1,0,0,0,0],
-          [0,0,0,0,0,1,0,0,0,0,0]] };
+          [0,0,0,0,0,1,0,0,0,0,0]],
+        
+     3:  [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,1,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0]]};
 
   var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
     'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
+    'alien3': { sx: 0,  sy: 55, w: 100, h: 100, cls: Alien, frames: 2 },  
     'player': { sx: 0,  sy: 55/*36*/, w: 45/*23*/, h: 33/*27*/, cls: Player ,frames: 2 },
     'missile': { sx: 0,  sy: 89, w: 13,  h: 14, cls: Missile },
     'emissile': { sx: 15,  sy: 90, w: 5,  h: 14, cls: Emissile },
@@ -40,18 +54,17 @@
   function startGame() {
     var screen = new GameScreen("HK Space Police","press space to start",
                                  function() {
-                                     Game.loadBoard(new GameBoard(1));
-                                     
+                                    Game.loadBoard(new GameBoard(1));
                                  });
     Game.loadBoard(screen);
     Game.loop();
      
       /* game background song */
      myAudio = new Audio('sound/spacebattle2.wav'); 
-if (typeof myAudio.loop == 'boolean')
-{
-    myAudio.loop = true;
-}
+        if (typeof myAudio.loop == 'boolean')
+        {
+            myAudio.loop = true;
+            }
 /*else
 {
     myAudio.addEventListener('ended', function() {
@@ -96,6 +109,7 @@ myAudio2.play();
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
+                                     
                                  });
     Game.loadBoard(screen);
       myAudio.pause();
@@ -104,7 +118,7 @@ myAudio2.play();
   }
 
   $(function() {
-    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav', }, 
+    GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav' }, 
                    function() { 
                        Game.initialize("#gameboard", levelData, spriteData,
                                       { "start": startGame,
