@@ -71,6 +71,7 @@ myAudio.play();
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
                                      myAudio2.pause();
+                                     
                                  });
     Game.loadBoard(screen);
       //pause ingame background music
@@ -88,8 +89,7 @@ myAudio.play();
             this.play();
         }, false);
 }*/
-myAudio2.play();
-      
+      myAudio2.play();
   }
 
 
@@ -105,6 +105,18 @@ myAudio2.play();
       myAudio3 = new Audio('sound/ggsound.mp3');
       myAudio3.play();
   }
+
+
+
+
+function healthDisplay() {
+                        //health
+                        ctx.font = "bold 14px Arial";
+                        ctx.fillText("Life Remaining:"+health, 80, 20);
+                }
+
+
+
 
   $(function() {
     GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav' }, 

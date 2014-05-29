@@ -10,7 +10,26 @@
 <!-- background elements -->    
   <style>
       #gameboard { background: url(images/backg.gif); }
-      #game-wrapper { margin:0 auto; width: 500px; }
+      #game-wrapper { margin:0 auto; width: 500px;height:500px;border:10px solid #333;  }
+
+#score {
+	position:absolute;
+	width:300px;
+	height:20px;
+	top:10px;
+	left:470px;
+    bottom:5px;
+	padding:5px;
+	color:#fff;
+	text-align:left;
+}
+
+#score_actual {
+	color:#00d20e;
+}
+
+    
+
 
       body{background:url(images/wallpaper.jpg);
            color: white;
@@ -20,11 +39,21 @@
   </style>
 </head>
 <body>
-  <div id='game-wrapper'>
+  <div id="game-wrapper">
+        <script langauge="javascript">
+            window.setInterval("refreshDiv()",100);
+            function refreshDiv(){
+        document.getElementById("score").innerHTML = "Score:" + score;   
+      }
+      </script>
+      <div id = "score"></div>
     <canvas id='gameboard' width='500' height='500'></canvas>
-  </div>
+          
+      
+      </div>
     
-    <p align="center">
+    
+        <p align="center">
     hi guys, feel free to play the HK space police
     <br>    
     left and right arrow : directions
@@ -32,6 +61,8 @@
     space               : fire
         
        <br>  <font align="center"size="30px"; color="red">Caution:</font> <br>press "?"(a key) to activate cheat mode. <"?" : the mark that everyone wants for this project!>
+    
+
     
     
     </p>
