@@ -1,5 +1,5 @@
 var Game = new function() {                                                                  
-  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' ,13 :'enter'};
+  var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' ,13 :'enter',65:'a'};
   this.keys = {};
 
   this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
@@ -55,11 +55,11 @@ var GameScreen = function GameScreen(text,text2,callback) {
 
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
-    canvas.font = "bold 40px arial";
+    canvas.font = "bold 40px Verdana";
     var measure = canvas.measureText(text);  
-    canvas.fillStyle = "#FFF888";
+    canvas.fillStyle = "#3366CC";
     canvas.fillText(text,Game.width/2 - measure.width/2,Game.height/2);
-    canvas.font = "bold 20px arial";
+    canvas.font = "bold 20px Verdana";
     var measure2 = canvas.measureText(text2);
     canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
   };
@@ -73,11 +73,11 @@ var NewGameScreen = function GameScreen(text,text2,callback) {
 
   this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
-    canvas.font = "bold 40px arial";
+    canvas.font = "bold 40px Verdana";
     var measure = canvas.measureText(text);  
     canvas.fillStyle = "#FFFFFF";
     canvas.fillText(text,Game.width/2 - measure.width/2,Game.height/2);
-    canvas.font = "bold 20px arial";
+    canvas.font = "bold 20px Verdana";
     var measure2 = canvas.measureText(text2);
     canvas.fillText(text2,Game.width/2 - measure2.width/2,Game.height/2 + 40);
   };

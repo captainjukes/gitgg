@@ -42,7 +42,7 @@ var AlienFlock = function AlienFlock() {
 
 }
 
-
+//Alien
 
 var Alien = function Alien(opts) {
   this.flock = opts['flock'];
@@ -86,6 +86,57 @@ Alien.prototype.fireSometimes = function() {
       }
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Boss
+
+var Boss = function Boss(opts) {
+  this.flock = opts['flock'];
+  this.frame = 0;
+  this.mx = 0;
+}
+
+Boss.prototype.draw = function(canvas) {
+  Sprites.draw(canvas,this.name,this.x,this.y,this.frame);
+}
+
+Boss.prototype.die = function() {
+  GameAudio.play('die');
+  this.flock.speed += 1;
+  this.board.remove(this);
+}
+
+Boss.prototype.step = function(dt) {
+  this.mx += dt * this.flock.dx;
+  this.y += this.flock.dy;
+  if(Math.abs(this.mx) > 10) {
+    if(this.y == this.flock.max_y[this.x]) {
+      this.fireSometimes();
+    }
+    this.x += this.mx;
+    this.mx = 0;
+    this.frame = (this.frame+1) % 2;
+    if(this.x > Game.width - Sprites.map.alien1.w * 2) this.flock.hit = -1;
+    if(this.x < Sprites.map.alien1.w) this.flock.hit = 1;
+  }
+  return true;
+}
+
+
+
+Boss.prototype.fireSometimes = function() {
+      if(Math.random()*100 < 30) {
+        this.board.addSprite('emissile',this.x + this.w/2 - Sprites.map.emissile.w/2,
+                                      this.y + this.h,                                 
+                                     { dy: 100 });
+      }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+
 var Player = function Player(opts) { 
   this.reloading = 0;
     this.frame = 0;
@@ -101,6 +152,7 @@ Player.prototype.die = function() {
   Game.callbacks['die']();
 }
 
+//siren animation and ship steps
 Player.prototype.step = function(dt) {
     
     
@@ -129,10 +181,52 @@ Player.prototype.step = function(dt) {
     this.board.e_missiles++;
     this.reloading = 9;
   }
+    
+        if(Game.keys['a'] && this.reloading <=0 && this.board.missiles < 1000) {
+    GameAudio.play('fire');
+        
+    this.board.addSprite('nmissile',
+                          this.x + this.w/20 - Sprites.map.missile.w/20,
+                          this.y-this.h*2,
+                          { dy: -1000, player: true });
+    this.board.e_missiles++;
+    this.reloading = 2;
+  }
+    
+    
   return true;
 }
 
-//Enemy Missiles
+//////////////////////////////
+
+var Nmissile = function Nmissile(opts) {
+   this.dy = opts.dy;
+   this.player = opts.player;
+}
+
+Nmissile.prototype.draw = function(canvas) {
+   Sprites.draw(canvas,'nmissile',this.x,this.y);
+}
+
+Nmissile.prototype.step = function(dt) {
+   this.y += this.dy * dt;
+
+   var enemy = this.board.collide(this);
+   if(enemy) { 
+     enemy.die();
+     return false;
+   }
+   return (this.y < 0 || this.y > Game.height) ? false : true;
+}
+
+Nmissile.prototype.die = function() {
+  if(this.player) this.board.missiles--;
+  if(this.board.missiles < 0) this.board.missiles=0;
+   this.board.remove(this);
+}
+
+
+//Missiles
 var Missile = function missile(opts) {
    this.dy = opts.dy;
    this.player = opts.player;
@@ -184,6 +278,9 @@ Emissile.prototype.die = function() {
   if(this.board.missiles < 0) this.board.missiles=0;
    this.board.remove(this);
 }
+
+
+
 
 /*EnemyMissile.prototype = new Sprite();
 EnemyMissile.prototype.type = OBJECT_ENEMY_PROJECTILE;
