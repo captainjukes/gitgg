@@ -143,7 +143,7 @@ Boss.prototype.fireSometimes = function() {
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-var shield = 3;
+var shield = 2;
 var Player = function Player(opts) { 
   this.reloading = 0;
     this.frame = 0;
@@ -162,7 +162,7 @@ Player.prototype.die = function() {
     //Game.callbacks['die']();
 
 
-    if (shield > 0){
+    if (shield > 1){
         shield--;
         
         }else{Game.callbacks['die']();

@@ -71,7 +71,7 @@ myAudio.play();
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
                                      myAudio2.pause();
-                                     shield = 3;
+                                     shield = 2;
                                      
                                  });
     Game.loadBoard(screen);
@@ -82,6 +82,7 @@ myAudio.play();
       if (typeof myAudio2.loop == 'boolean')
       {
         myAudio2.loop = true;
+          shield = 0;
       }
      /* else
       {
@@ -99,13 +100,14 @@ myAudio.play();
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
-                                     shield = 3 ;
+                                     shield = 2 ;
                                      
                                  });
     Game.loadBoard(screen);
       myAudio.pause();
       myAudio3 = new Audio('sound/ggsound.mp3');
       myAudio3.play();
+      
   }
 
 

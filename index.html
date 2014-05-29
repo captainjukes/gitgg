@@ -10,7 +10,7 @@
 <!-- background elements -->    
   <style>
       #gameboard { background: url(images/backg.gif); }
-      #game-wrapper { margin:0 auto; width: 500px;height:500px;border:10px solid #333;  }
+      #game-wrapper { margin:0 auto; width: 500px;height:527px;border:10px solid #333;background-color: black;  }
 
 #score {
 	position:absolute;
@@ -29,16 +29,15 @@
 }
     
       #lives {
-	position:absolute;
-	width:300px;
-	height:20px;
-	top:10px;
-	left:470px;
-    bottom:5px;
-	padding:5px;
+          position:inherit;
+	width:0px;
+	top:0px;
+	right:0px;
+    bottom:-10px;
+	padding:0px;
 	color:#fff;
 	text-align:left;
-    font-size: 40px;
+    font-size: 25px;
 }
       
 
@@ -62,7 +61,8 @@
             function refreshDiv(){
         document.getElementById("lives").innerHTML = "Lives:" + shield;   
       }
-      </script></div> 
+      </script>
+      </div> 
       
       
     <canvas id='gameboard' width='500' height='500'></canvas>
