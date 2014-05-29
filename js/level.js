@@ -71,6 +71,7 @@ myAudio.play();
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
                                      myAudio2.pause();
+                                     shield = 3;
                                      
                                  });
     Game.loadBoard(screen);
@@ -98,6 +99,7 @@ myAudio.play();
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
                                      myAudio.play();
+                                     shield = 3 ;
                                      
                                  });
     Game.loadBoard(screen);

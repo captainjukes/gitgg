@@ -142,10 +142,12 @@ Boss.prototype.fireSometimes = function() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 
+
+var shield = 3;
 var Player = function Player(opts) { 
   this.reloading = 0;
     this.frame = 0;
-    this.shield = 3;
+    
 }
 
 Player.prototype.draw = function(canvas) {
@@ -160,8 +162,8 @@ Player.prototype.die = function() {
     //Game.callbacks['die']();
 
 
-    if (this.shield > 1){
-        this.shield--;
+    if (shield > 0){
+        shield--;
         
         }else{Game.callbacks['die']();
         

@@ -27,6 +27,20 @@
 #score_actual {
 	color:#00d20e;
 }
+    
+      #lives {
+	position:absolute;
+	width:300px;
+	height:20px;
+	top:10px;
+	left:470px;
+    bottom:5px;
+	padding:5px;
+	color:#fff;
+	text-align:left;
+    font-size: 40px;
+}
+      
 
     
 
@@ -40,13 +54,17 @@
 </head>
 <body>
   <div id="game-wrapper">
-        <script langauge="javascript">
+
+      <div id = "lives">
+      
+                  <script langauge="javascript">
             window.setInterval("refreshDiv()",100);
             function refreshDiv(){
-        document.getElementById("score").innerHTML = "Score:" + score;   
+        document.getElementById("lives").innerHTML = "Lives:" + shield;   
       }
-      </script>
-      <div id = "score"></div>
+      </script></div> 
+      
+      
     <canvas id='gameboard' width='500' height='500'></canvas>
           
       
