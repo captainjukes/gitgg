@@ -1,3 +1,5 @@
+
+//key codes for all buttons in game
 var Game = new function() {                                                                  
   var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' ,13 :'enter',65:'a'};
   this.keys = {};
@@ -21,7 +23,9 @@ var Game = new function() {
     Sprites.load(sprite_data,this.callbacks['start']);
   };
 
-  this.loadBoard = function(board) { Game.board = board; };
+ 
+    //LoadBoard
+    this.loadBoard = function(board) { Game.board = board; };
 
   this.loop = function() { 
     Game.board.step(30/1000); 
@@ -47,13 +51,15 @@ var Sprites = new function() {
   };
 }
 
+//Screen for startGame,
 var GameScreen = function GameScreen(text,text2,callback) {
   this.step = function(dt) {
     if(Game.keys['fire'] && callback) callback();
   };
     
 
-  this.render = function(canvas) {
+  //Text setting on startGame screen(including font family and size)
+    this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
     canvas.font = "bold 40px Verdana";
     var measure = canvas.measureText(text);  
@@ -65,13 +71,16 @@ var GameScreen = function GameScreen(text,text2,callback) {
   };
 };
 
+
+//screen for endGame and winGame function
 var NewGameScreen = function GameScreen(text,text2,callback) {
   this.step = function(dt) {
     if(Game.keys['enter'] && callback) callback();
   };
     
 
-  this.render = function(canvas) {
+    //Text setting on winGame and endGame screen(including font family and size)
+    this.render = function(canvas) {
     canvas.clearRect(0,0,Game.width,Game.height);
     canvas.font = "bold 40px Verdana";
     var measure = canvas.measureText(text);  
@@ -84,7 +93,7 @@ var NewGameScreen = function GameScreen(text,text2,callback) {
 };
 
 
-
+//Canvas GameBoard
 var GameBoard = function GameBoard(level_number) {
   this.removed_objs = [];
   this.missiles = 0;
@@ -146,13 +155,31 @@ var GameBoard = function GameBoard(level_number) {
     });
   };
 
-  this.loadLevel = function(level) {
+  
+   //LoadLevel Function
+    this.loadLevel = function(level) {
     this.objects = [];
     this.player = this.addSprite('player', // Sprite
                                  Game.width/2, // X
                                  Game.height - Sprites.map['player'].h - 10); // Y
 
-    var flock = this.add(new AlienFlock());
+   /*var bossFlock = this.add.(new BossFlock());
+   for(var y=0,rows=level.length;y<rows;y++) {
+      for(var x=0,cols=level[y].length;x<cols;x++) {
+        var boss = Sprites.map['alien' + level[y][x]];
+        if(boss) { 
+          this.addSprite('alien' + level[y][x], // Which Sprite
+                         (alien.w+10)*x,  // X
+                         alien.h*y,       // Y
+                         { flock: flock }); // Options
+            
+        }
+      }
+    }*/
+     
+   
+      
+      var flock = this.add(new AlienFlock());
     for(var y=0,rows=level.length;y<rows;y++) {
       for(var x=0,cols=level[y].length;x<cols;x++) {
         var alien = Sprites.map['alien' + level[y][x]];
@@ -161,9 +188,15 @@ var GameBoard = function GameBoard(level_number) {
                          (alien.w+10)*x,  // X
                          alien.h*y,       // Y
                          { flock: flock }); // Options
+            
         }
       }
     }
+
+    
+      
+      
+      
   };
 
   this.nextLevel = function() { 
@@ -173,6 +206,7 @@ var GameBoard = function GameBoard(level_number) {
   this.loadLevel(Game.level_data[level_number]);
 };
 
+//Audio Channel
 var GameAudio = new function() {
   this.load_queue = [];
   this.loading_sounds = 0;

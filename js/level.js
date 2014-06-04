@@ -26,12 +26,24 @@
           [0,0,0,1,1,1,1,1,0,0,0],
           [0,0,0,0,1,1,1,0,0,0,0],
           [0,0,0,0,0,1,0,0,0,0,0]],
+        
+      /*3: [[0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [3,3,3,3,3,3,3,3,3,3,3],
+          [3,3,3,3,3,3,3,3,3,3,3],
+          [3,0,3,3,3,3,3,3,3,0,3],
+          [3,0,3,3,3,3,3,3,3,0,3],
+          [0,0,0,3,3,3,3,3,0,0,0],
+          [0,0,0,0,3,3,3,0,0,0,0],
+          [0,0,0,0,0,3,0,0,0,0,0]],*/
     }
 
   var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
     'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
-    'alien3': { sx: 0,  sy: 55, w: 23, h: 18, cls: Boss, frames: 2 },  
+    'alien3': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },  
     'player': { sx: 0,  sy: 55/*36*/, w: 45/*23*/, h: 33/*27*/, cls: Player ,frames: 2 },
     'missile': { sx: 0,  sy: 89, w: 13,  h: 14, cls: Missile },
     'emissile': { sx: 15,  sy: 90, w: 5,  h: 14, cls: Emissile },
@@ -54,13 +66,6 @@
         {
             myAudio.loop = true;
             }
-/*else
-{
-    myAudio.addEventListener('ended', function() {
-        this.currentTime = 0;
-        this.play();
-    }, false);
-}*/
 myAudio.play();
   }
 
@@ -84,13 +89,7 @@ myAudio.play();
         myAudio2.loop = true;
           shield = 0;
       }
-     /* else
-      {
-          myAudio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        }, false);
-}*/
+
       myAudio2.play();
   }
 
@@ -112,15 +111,9 @@ myAudio.play();
 
 
 
-
-function healthDisplay() {
-                        //health
-                        ctx.font = "bold 14px Arial";
-                        ctx.fillText("Life Remaining:"+health, 80, 20);
-                }
-
-
-
+///////////////////////////////////////////////////////////
+                
+                //audio part, initialization
 
   $(function() {
     GameAudio.load({ 'fire' : 'sound/vi.wav', 'die' : 'sound/explode.wav' }, 
