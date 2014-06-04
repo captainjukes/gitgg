@@ -1,7 +1,9 @@
 
+//TestScore
 var score = 0;
 
 
+//AlienFlock
 var AlienFlock = function AlienFlock() {
   this.invulnrable = true;
   this.dx = 10; this.dy = 0;
@@ -43,7 +45,7 @@ var AlienFlock = function AlienFlock() {
     this.max_y = max;
     return true;
       
-      if (this.dy == 0){Game.callbacks['die']();}
+     
   };
 
 }
@@ -56,15 +58,18 @@ var Alien = function Alien(opts) {
   this.mx = 0;
 }
 
+//related to sprite data
 Alien.prototype.draw = function(canvas) {
   Sprites.draw(canvas,this.name,this.x,this.y,this.frame);
 }
 
+//when an alien dies, flock speeds up
 Alien.prototype.die = function() {
   GameAudio.play('die');
   this.flock.speed += 0.9;
   this.board.remove(this);
-   score++;
+   //console log
+    score++;
     console.log(score);
 }
 
@@ -86,11 +91,13 @@ Alien.prototype.step = function(dt) {
 
 
 
+//Alien using class 'emissile', fire when a random number times 100 but smaller than 30
 Alien.prototype.fireSometimes = function() {
       if(Math.random()*100 < 30) {
         this.board.addSprite('emissile',this.x + this.w/2 - Sprites.map.emissile.w/2,
                                       this.y + this.h,                                 
-                                     { dy: 150 });
+                             //speed        
+                             { dy: 150 });
       }
 }
 
@@ -98,7 +105,7 @@ Alien.prototype.fireSometimes = function() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
 //Boss
 
 var Boss = function Boss(opts) {
@@ -142,10 +149,10 @@ Boss.prototype.fireSometimes = function() {
                                      { dy: 100 });
       }
 }
-
+*/
 /////////////////////////////////////////////////////////////////////////////////////
 
-
+//shield = 2 = lives 
 var shield = 2;
 var Player = function Player(opts) { 
   this.reloading = 0;
@@ -165,6 +172,7 @@ Player.prototype.die = function() {
     //Game.callbacks['die']();
 
 
+    // if player gets hit, -1 live
     if (shield > 1){
         shield--;
         
@@ -181,7 +189,8 @@ Player.prototype.die = function() {
 //siren animation and ship steps
 Player.prototype.step = function(dt) {
     
-    
+  
+    //one of the parts that i like in the game. the siren animation on Player
   if(Game.keys['left']) { this.x -= 100 * dt; this.frame = (this.frame+1) % 2; }
   if(Game.keys['right']) { this.x += 100 * dt; this.frame = (this.frame+1) % 2; }
 
@@ -200,7 +209,8 @@ Player.prototype.step = function(dt) {
     if(Game.keys['fire'] && this.reloading <=0 && this.board.missiles < 1000) {
     GameAudio.play('fire');
         
-    this.board.addSprite('missile',
+    //running 'missile' function
+        this.board.addSprite('missile',
                           this.x + this.w/2 - Sprites.map.missile.w/2,
                           this.y-this.h,
                           { dy: -300, player: true });
@@ -208,13 +218,16 @@ Player.prototype.step = function(dt) {
     this.reloading = 9;
   }
     
-        if(Game.keys['a'] && this.reloading <=0 && this.board.missiles < 1000) {
+    //press A to activate cheat mode    
+    if(Game.keys['a'] && this.reloading <=0 && this.board.missiles < 1000) {
     GameAudio.play('fire');
         
-    this.board.addSprite('nmissile',
+    //using nmissile class
+        this.board.addSprite('nmissile',
                           this.x + this.w/20 - Sprites.map.missile.w/20,
                           this.y-this.h*2,
-                          { dy: -1000, player: true });
+                         //speed 
+                         { dy: -1000, player: true });
     this.board.e_missiles++;
     this.reloading = 2;
   }
@@ -224,6 +237,8 @@ Player.prototype.step = function(dt) {
 }
 
 //////////////////////////////
+
+//cheat mode missile 
 
 var Nmissile = function Nmissile(opts) {
    this.dy = opts.dy;
@@ -280,11 +295,13 @@ Missile.prototype.die = function() {
    this.board.remove(this);
 }
 
+// Alien missile
 var Emissile = function Emissile(opts) {
    this.dy = opts.dy;
    this.player = opts.player;
 }
 
+//how it calls the spriteData
 Emissile.prototype.draw = function(canvas) {
    Sprites.draw(canvas,'emissile',this.x,this.y);
 }
@@ -312,16 +329,3 @@ Emissile.prototype.die = function() {
 
 
 
-/*EnemyMissile.prototype = new Sprite();
-EnemyMissile.prototype.type = OBJECT_ENEMY_PROJECTILE;
-
-EnemyMissile.prototype.step = function(dt)  {
-  this.y += this.vy * dt;
-  var collision = this.board.collide(this,OBJECT_PLAYER)
-  if(collision) {
-    collision.hit(this.damage);
-    this.board.remove(this);
-  } else if(this.y > Game.height) {
-      this.board.remove(this); 
-  }
-};*/

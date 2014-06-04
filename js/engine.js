@@ -4,7 +4,8 @@ var Game = new function() {
   var KEY_CODES = { 37:'left', 39:'right', 32 :'fire' ,13 :'enter',65:'a'};
   this.keys = {};
 
-  this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
+  //iniialization
+    this.initialize = function(canvas_dom,level_data,sprite_data,callbacks) {
     this.canvas_elem = $(canvas_dom)[0];
     this.canvas = this.canvas_elem.getContext('2d');
     this.width = $(this.canvas_elem).attr('width');
@@ -34,6 +35,7 @@ var Game = new function() {
   };
 };
 
+//Call spritesheet
 var Sprites = new function() {
   this.map = { }; 
 
@@ -199,6 +201,8 @@ var GameBoard = function GameBoard(level_number) {
       
   };
 
+    
+    //call next level
   this.nextLevel = function() { 
     return Game.level_data[level_number + 1] ? (level_number + 1) : false 
   };

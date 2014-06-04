@@ -40,7 +40,8 @@
           [0,0,0,0,0,3,0,0,0,0,0]],*/
     }
 
-  var spriteData = {
+  //spriteData
+    var spriteData = {
     'alien1': { sx: 0,  sy: 0,  w: 23, h: 18, cls: Alien, frames: 2 },
     'alien2': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },
     'alien3': { sx: 0,  sy: 18, w: 23, h: 18, cls: Alien, frames: 2 },  
@@ -94,7 +95,8 @@ myAudio.play();
   }
 
 
-  function winGame() {
+//winGameFunction 
+function winGame() {
     var screen = new NewGameScreen("GG,You Win!","(press enter to restart)",
                                  function() {
                                      Game.loadBoard(new GameBoard(1));
@@ -102,6 +104,8 @@ myAudio.play();
                                      shield = 2 ;
                                      
                                  });
+    
+    //winGame Audio
     Game.loadBoard(screen);
       myAudio.pause();
       myAudio3 = new Audio('sound/ggsound.mp3');
